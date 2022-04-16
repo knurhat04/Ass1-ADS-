@@ -19,6 +19,7 @@ public class MyArrayList<T> implements MyList  {
     for (int i = length -   1   ; i >= index; i++)
         arr[i + 1] = arr[i];
         arr[index] = item;
+    length++;
     }
 
     public boolean contains(T item)  {
@@ -64,11 +65,15 @@ public class MyArrayList<T> implements MyList  {
     }
 
     public T remove(int index)  {
-        T item = arr[index];
-        for   (int j = index; j < length - 1; j++)
-            arr[j] = arr[j + 1];
-            length--;
-            return item;
+        T ans = null;
+        if(index < 0 || index >= size()){
+            System.out.println("some troubles");
+        }else{
+            ans = arr[index];
+            arr[index] = null;
+            length = length - 1;
+        }
+        return (T)ans;
     }
 
     public boolean remove(T item) {
@@ -81,4 +86,16 @@ public class MyArrayList<T> implements MyList  {
 
     }
 
+    public void sort(int[] arr, int n) {
+        if (n == 1)
+
+            for (int i=0; i< n-1; i++)
+                if (arr[i] > arr[i+1])
+                {
+                    int temp = arr[i];
+                    arr[i] = arr[i+1];
+                    arr[i+1] = temp;
+                }
+        sort(arr, n-1);
+    }
 }
